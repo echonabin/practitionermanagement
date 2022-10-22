@@ -7,7 +7,10 @@
     "build:ui": "nx build practitioner-ui",
     "test:ui": "nx test practitioner-ui",
     "lint:ui": "nx lint practitioner-ui",
-    "test": "nx test"
+    "start:backend": "nx serve practitioner-backend",
+    "build:backend": "nx build practitioner-backend",
+    "test:backend": "nx test practitioner-backend",
+    "lint:backend": "nx lint practitioner-backend"
   },
   "private": true,
   "dependencies": {
