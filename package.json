@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
+    "start:ui": "nx serve practitioner-ui",
+    "build:ui": "nx build practitioner-ui",
+    "test:ui": "nx test practitioner-ui",
+    "lint:ui": "nx lint practitioner-ui",
     "test": "nx test"
   },
   "private": true,
