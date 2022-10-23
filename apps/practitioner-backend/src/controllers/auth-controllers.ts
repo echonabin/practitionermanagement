@@ -93,7 +93,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     token,
   })
     .select('-_id -__v')
-    .populate('user', '-_id -password');
+    .populate('user', '-password');
 
   if (!r_token || !r_token.isActive || r_token.expires < new Date()) {
     return res.status(400).send({

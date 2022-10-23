@@ -6,10 +6,11 @@ export const API_ENDPOINTS = {
     refresh: '/auth/refresh',
   },
   practitioner: {
-    get: '/practitioner',
+    get: '/practitioners',
     getOne: '/practitioner/:id',
     create: '/practitioner',
     update: '/practitioner/:id',
     delete: '/practitioner/:id',
+    hardDelete: '/practitioner/hard-delete/:id',
   },
 };

@@ -8,7 +8,7 @@ import * as moment from 'moment';
 export const generateJwtToken = (account: any) => {
   // create a jwt token containing the account id that expires in 15 minutes
   return jwt.sign({ account }, process.env.NX_JWT_SECRET, {
-    expiresIn: '1m',
+    expiresIn: '10m',
   });
 };
 
