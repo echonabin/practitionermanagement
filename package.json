@@ -8,6 +8,7 @@
     "test:ui": "nx test practitioner-ui",
     "lint:ui": "nx lint practitioner-ui",
     "start:backend": "nx serve practitioner-backend",
+    "debug:backend": "nx serve practitioner-backend --inspect",
     "build:backend": "nx build practitioner-backend",
     "test:backend": "nx test practitioner-backend",
     "lint:backend": "nx lint practitioner-backend"
@@ -21,6 +22,7 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
     "joi": "^17.6.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.7",
