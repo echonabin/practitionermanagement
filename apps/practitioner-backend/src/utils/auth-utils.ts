@@ -2,12 +2,13 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
 import { RefreshToken } from '../models/refreshtoken';
+import { ONE_HOUR } from '../configs/auth-config';
 
 // // small functions
 export const generateJwtToken = (account: any) => {
   // create a jwt token containing the account id that expires in 15 minutes
   return jwt.sign({ account }, process.env.NX_JWT_SECRET, {
-    expiresIn: '1d',
+    expiresIn: '1m',
   });
 };
 
@@ -20,7 +21,7 @@ export const generateRefreshToken = async (account: any) => {
   return await RefreshToken.create({
     userId: account._id,
     token: randomTokenString(),
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    expires: new Date(Date.now() + ONE_HOUR).toISOString(),
     isActive: true,
   });
 };
