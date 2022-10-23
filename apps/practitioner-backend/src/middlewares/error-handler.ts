@@ -12,6 +12,10 @@ export const errorHandler = (
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 
+  if (err.name === 'UnauthorizedError') {
+    return res.status(401).send({ errors: [{ message: err.message }] });
+  }
+
   res.status(400).send({
     errors: [{ message: 'Something went wrong' }],
   });

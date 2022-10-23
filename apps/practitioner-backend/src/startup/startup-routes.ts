@@ -5,6 +5,7 @@ import { errorHandler } from '../middlewares/error-handler';
 
 // Routes
 import { authRouter } from '../routes/auth-routes';
+import { practitionerRouter } from '../routes/practitioner-routes';
 
 export default (app: Express) => {
   const { base_url } = API_ENDPOINTS;
@@ -13,6 +14,7 @@ export default (app: Express) => {
 
   // Base URL => "/api"
   app.use(base_url, authRouter);
+  app.use(base_url, practitionerRouter);
 
   // Incase of 404 (Not Found)
   app.all('*', async (req, res) => {

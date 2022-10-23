@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
 import { RefreshToken } from '../models/refreshtoken';
-import { ONE_HOUR } from '../configs/auth-config';
+import * as moment from 'moment';
 
 // // small functions
 export const generateJwtToken = (account: any) => {
@@ -17,11 +17,21 @@ function randomTokenString() {
 }
 
 export const generateRefreshToken = async (account: any) => {
+  // remove old refresh tokens
+  const prevRefreshToken = await RefreshToken.findOne(
+    { user: account._id, isActive: true },
+    {},
+    { sort: { created_at: -1 } }
+  );
+  if (prevRefreshToken) {
+    prevRefreshToken.isActive = false;
+    await prevRefreshToken.save();
+  }
   // create a refresh token that expires in 7 days
   return await RefreshToken.create({
-    userId: account._id,
+    user: account._id,
     token: randomTokenString(),
-    expires: new Date(Date.now() + ONE_HOUR).toISOString(),
+    expires: moment(new Date()).add(1, 'h').toISOString(),
     isActive: true,
   });
 };

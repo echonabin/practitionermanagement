@@ -9,7 +9,7 @@ import { RefreshToken } from '../models/refreshtoken';
 export const authorize = () => {
   return [
     // authenticate JWT token and attach user to request object (req.auth)
-    jwt({ secret: process.env.JWT_SECRET!, algorithms: ['HS256'] }),
+    jwt({ secret: process.env.NX_JWT_SECRET!, algorithms: ['HS256'] }),
 
     async (req: any, res: Response, next: NextFunction) => {
       const user = req.auth.account;
@@ -18,6 +18,8 @@ export const authorize = () => {
       const refreshTokens = await RefreshToken.findOne({
         user: user._id,
       });
+
+      console.log('account', account);
 
       if (!account) {
         // account no longer exists or role not authorized
