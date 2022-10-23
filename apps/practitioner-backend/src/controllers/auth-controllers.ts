@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { RefreshToken } from '../models/refreshtoken';
 import { AuthValidator } from '../validators/auth-validation';
 import * as bcrypt from 'bcryptjs';
+import * as moment from 'moment';
 // utils
 import {
   hash,
@@ -11,6 +12,7 @@ import {
   generateRefreshToken,
   basicDetails,
 } from '../utils/auth-utils';
+import { ONE_HOUR } from '../configs/auth-config';
 
 // Register User
 export const registerUser = async (
@@ -47,7 +49,11 @@ export const registerUser = async (
 };
 
 // Login User
-export const loginUser = async (req, res, next) => {
+export const loginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { error } = AuthValidator.login_user(req.body);
   if (error) {
     next(new RequestValidationError(error));
@@ -80,17 +86,24 @@ export const loginUser = async (req, res, next) => {
 };
 
 // Refresh Token
-export const refreshToken = async (req, res, next) => {
+export const refreshToken = async (req: Request, res: Response) => {
   const { token } = req.query;
+
   const r_token = await RefreshToken.findOne({
-    where: {
-      token: token,
-    },
-  }).select('-_id -__v');
+    token,
+  })
+    .select('-_id -__v')
+    .populate('user', '-_id -password');
+
   if (!r_token || !r_token.isActive || r_token.expires < new Date()) {
     return res.status(400).send({
       errors: [{ message: 'Invalid token' }],
     });
   }
-  res.status(200).json({ r_token });
+
+  const jwtToken = generateJwtToken(r_token.user);
+  res.status(200).json({
+    ...basicDetails(r_token.user),
+    jwtToken,
+  });
 };

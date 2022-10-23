@@ -21,24 +21,29 @@ interface RefreshTokenModel extends mongoose.Model<RefreshTokenDoc> {
   build(attrs: RefreshTokenAttrs): RefreshTokenDoc;
 }
 
-const RefreshTokenSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Types.ObjectId,
-    ref: 'User',
+const RefreshTokenSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+    },
+    token: {
+      type: String,
+      required: true,
+    },
+    expires: {
+      type: Date,
+      default: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  token: {
-    type: String,
-    required: true,
-  },
-  expires: {
-    type: Date,
-    default: Date.now() + 7 * 24 * 60 * 60 * 1000,
-  },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 RefreshTokenSchema.statics.build = (attrs: RefreshTokenAttrs) => {
   return new RefreshToken(attrs);
