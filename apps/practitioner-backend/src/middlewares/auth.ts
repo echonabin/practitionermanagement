@@ -19,8 +19,6 @@ export const authorize = () => {
         user: user._id,
       });
 
-      console.log('account', account);
-
       if (!account) {
         // account no longer exists or role not authorized
         return res.status(401).json({ message: 'Unauthorized', status: 401 });

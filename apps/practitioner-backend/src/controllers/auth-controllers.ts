@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response, NextFunction } from 'express';
 import { RequestValidationError } from '../errors/request-validation-error';
 import { User } from '../models/user';
 import { RefreshToken } from '../models/refreshtoken';
 import { AuthValidator } from '../validators/auth-validation';
 import * as bcrypt from 'bcryptjs';
-import * as moment from 'moment';
 // utils
 import {
   hash,
@@ -12,7 +12,6 @@ import {
   generateRefreshToken,
   basicDetails,
 } from '../utils/auth-utils';
-import { ONE_HOUR } from '../configs/auth-config';
 
 // Register User
 export const registerUser = async (
@@ -24,7 +23,7 @@ export const registerUser = async (
   if (error) {
     next(new RequestValidationError(error));
   }
-  const { firstname, lastname, email, password, profileUrl } = req.body;
+  const { firstname, lastname, email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     return res.status(400).send({
@@ -37,11 +36,12 @@ export const registerUser = async (
     lastname,
     email,
     password,
+    // @ts-ignore
+    profileUrl: req.file.location as string,
   });
   // hash password
   account.password = hash(password);
-  // [TODO] - Add profileUrl (with s3 bucket)
-  await account.save();
+  req.file && (await account.save());
 
   res.status(200).json({
     message: 'User created successfully',

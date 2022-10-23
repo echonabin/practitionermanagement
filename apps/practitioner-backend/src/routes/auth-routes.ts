@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { upload } from '../configs/multer-config';
 import { API_ENDPOINTS } from '../constants/api-endpoints';
 // Controllers
 import {
@@ -16,7 +17,7 @@ router.post(auth.login, loginUser);
 
 // @Method: POST
 // @Path: /api/auth/register
-router.post(auth.register, registerUser);
+router.post(auth.register, upload.single('profile'), registerUser);
 
 // @Method: GET
 // @Path: /api/auth/refresh?token=<token>
