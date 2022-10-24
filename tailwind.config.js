@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./apps/practitioner-ui/pages/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './apps/practitioner-ui/pages/**/*.{js,ts,jsx,tsx}',
+    './libs/components/src/lib/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };
