@@ -54,6 +54,7 @@ export const useAuthData = create<authState>((set) => ({
       data: {} as authData,
       loading: true,
     }));
+    localStorage.removeItem('accessToken');
   },
   refreshToken: (data: authData) => {
     set((state) => ({
