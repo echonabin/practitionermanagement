@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from './baseUrls.json';
+import { getCookie, setCookie } from 'cookies-next';
 
 type RefreshTokenResponse = {
   jwtToken: string;
@@ -15,7 +16,7 @@ const publicAgent = axios.create({
 
 privateAgent.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getCookie('accessToken');
     if (accessToken && config.headers)
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     return config;
@@ -32,7 +33,7 @@ privateAgent.interceptors.response.use(
   },
   function (error) {
     const originalRequest = error.config;
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = getCookie('refreshToken');
     if (
       refreshToken &&
       error?.response?.status === 401 &&
@@ -43,7 +44,7 @@ privateAgent.interceptors.response.use(
         .then((res: any) => {
           if (res.status === 200) {
             const tokenData: RefreshTokenResponse = res.data;
-            localStorage.setItem('accessToken', tokenData.jwtToken);
+            setCookie('accessToken', tokenData.jwtToken);
             return privateAgent(originalRequest);
           }
         });
