@@ -1,4 +1,5 @@
 import create from 'zustand';
+import { deleteCookie } from 'cookies-next';
 
 type authData = {
   id: string;
@@ -54,7 +55,8 @@ export const useAuthData = create<authState>((set) => ({
       data: {} as authData,
       loading: true,
     }));
-    localStorage.removeItem('accessToken');
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
   },
   refreshToken: (data: authData) => {
     set((state) => ({
