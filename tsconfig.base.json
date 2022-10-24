@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@practitionermanagement/components": ["libs/components/src/index.ts"]
+      "@practitionermanagement/components": ["libs/components/src/index.ts"],
+      "@practitionermanagement/store": ["libs/store/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
