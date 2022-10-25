@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Button, SignupForm } from '@practitionermanagement/components';
+import { withAuth } from '@practitionermanagement/utils';
 
 const Signup = () => {
   const router = useRouter();
@@ -47,4 +48,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withAuth(Signup);

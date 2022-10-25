@@ -30,11 +30,15 @@ interface authState {
     profileUrl: string;
   };
   loading: boolean;
+  error: string;
+  message: string;
   registerUser: (data: registerData) => void;
   loginUser: (data: authData) => void;
   logoutUser: () => void;
   refreshToken: (data: authData) => void;
   setLoading: () => void;
+  setError: (error: string) => void;
+  resetErr: () => void;
 }
 
 export const useAuthData = create<authState>((set) => ({
@@ -49,6 +53,7 @@ export const useAuthData = create<authState>((set) => ({
   },
   data: {} as authData,
   message: '',
+  error: '',
   registerUser: (data: registerData) => {
     set((state) => ({
       ...state,
@@ -91,5 +96,19 @@ export const useAuthData = create<authState>((set) => ({
       ...state,
       loading: false,
     }));
+  },
+  setError: (error: string) => {
+    set((state) => ({
+      ...state,
+      error: error,
+    }));
+  },
+  resetErr: () => {
+    setTimeout(() => {
+      set((state) => ({
+        ...state,
+        error: '',
+      }));
+    }, 3000);
   },
 }));

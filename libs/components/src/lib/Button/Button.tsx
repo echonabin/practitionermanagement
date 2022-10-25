@@ -23,7 +23,7 @@ const Button = (props: ButtonProps) => {
     className,
     type = 'button',
   } = props;
-  const baseStyle = `flex font-poppins items-center justify-center py-2 px-4 rounded font-regular focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-300 ease-linear ${className}`;
+  const baseStyle = `flex font-poppins items-center justify-center py-2 px-4 rounded-full font-regular focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-300 ease-linear ${className}`;
   const styles = {
     primary: `${baseStyle} bg-blue-500 hover:bg-blue-700 text-white`,
     secondary: `${baseStyle} hover:bg-gray-500 hover:text-white text-gray-500 border-[1px] border-gray-500`,

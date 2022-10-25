@@ -1,7 +1,8 @@
-import { Button, LoginForm } from '@practitionermanagement/components';
+import Head from 'next/head';
 import React from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+import { Button, LoginForm } from '@practitionermanagement/components';
+import { withAuth } from '@practitionermanagement/utils';
 
 const Login = () => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const Login = () => {
               varient="secondary"
               title="Create an account"
               className="rounded-full w-full"
-              onClick={() => router.push('/signup')}
+              onClick={() => router.push('/signup?signup=true')}
             />
           </div>
         </div>
@@ -38,4 +39,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withAuth(Login);

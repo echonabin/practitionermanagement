@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@practitionermanagement/components": ["libs/components/src/index.ts"],
+      "@practitionermanagement/constants": ["libs/constants/src/index.ts"],
       "@practitionermanagement/store": ["libs/store/src/index.ts"],
       "@practitionermanagement/utils": ["libs/utils/src/index.ts"]
     }

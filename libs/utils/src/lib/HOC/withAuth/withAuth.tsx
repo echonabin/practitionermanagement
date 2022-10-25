@@ -7,10 +7,27 @@ const withAuth = (Component: React.ComponentType) => {
   return (props: React.PropsWithChildren<any>) => {
     const router = useRouter();
     const token = getCookie('accessToken')?.toString();
+    const [loaded, setLoaded] = React.useState(false);
+    const [isSignup, setIsSignup] = React.useState(router.query.signup);
     useEffect(() => {
-      if (!token) router.push('/login');
+      if (!token && isSignup && !loaded) {
+        router.push('/signup');
+        setLoaded(true);
+      } else if (!token && !loaded) {
+        router.push('/login');
+        setLoaded(true);
+      }
+      if (
+        (token && router.pathname === '/login') ||
+        (token && router.pathname === '/signup')
+      ) {
+        router.push('/dashboard');
+      }
+      // if (token && router.pathname === '/signup') {
+      //   router.push('/');
+      // }
     });
-    return token ? <Component {...props} /> : null;
+    return <Component {...props} />;
   };
 };
 

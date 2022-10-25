@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { API_ENDPOINTS } from '@practitionermanagement/store';
+import { API_ENDPOINTS } from '@practitionermanagement/constants';
 import { authorize } from '../middlewares/auth';
 import {
   getPractitioner,

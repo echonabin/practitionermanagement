@@ -1,10 +1,18 @@
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { Formik, Form } from 'formik';
+import { setCookie } from 'cookies-next';
 import { Oval } from 'react-loader-spinner';
 import { Button, Alert } from '..';
 import Input from '../Input/Input';
-import {privateAgent} from '@practitionermanagement/store'
+import { privateAgent, useAuthData } from '@practitionermanagement/store';
+import { API_ENDPOINTS } from '@practitionermanagement/constants';
 
 const LoginForm = () => {
+  const { host_url, base_url, auth } = API_ENDPOINTS;
+  const { loginUser, setError, error } = useAuthData();
+  const router = useRouter();
+  console.log(error);
   return (
     <div>
       <Formik
@@ -20,9 +28,38 @@ const LoginForm = () => {
           }
           return errors;
         }}
-        onSubmit={async(values, { setSubmitting }) => {
-         const { email, password } = values;
-         const res = await privateAgent.post()
+        onSubmit={async (values, { setSubmitting }) => {
+          const { email, password } = values;
+          const id = toast.loading('Loading...');
+          try {
+            const res = await privateAgent.post(
+              `${host_url}${base_url}${auth.login}`,
+              { email, password }
+            );
+            toast.update(id, {
+              render: 'Login Successful',
+              autoClose: 4000,
+              type: 'success',
+              isLoading: false,
+            });
+            setSubmitting(false);
+            setCookie('accessToken', res.data.jwtToken);
+            setCookie('refreshToken', res.data.refreshToken.token);
+            router.push('/dashoboard');
+            loginUser(res.data);
+          } catch (error: any) {
+            console.log(error);
+            toast.update(id, {
+              render:
+                error.response.status === 400
+                  ? error.response.data.errors[0].message
+                  : error.message,
+              autoClose: 4000,
+              type: 'error',
+              isLoading: false,
+            });
+            setError(error.response.data.message);
+          }
         }}
       >
         {({ values, errors, touched, handleChange, isSubmitting }) => (
