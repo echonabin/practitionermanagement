@@ -22,6 +22,13 @@ type registerData = {
 
 interface authState {
   data: authData;
+  user: {
+    id: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    profileUrl: string;
+  };
   loading: boolean;
   registerUser: (data: registerData) => void;
   loginUser: (data: authData) => void;
@@ -33,6 +40,13 @@ interface authState {
 export const useAuthData = create<authState>((set) => ({
   // Initial state
   loading: true,
+  user: {
+    id: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    profileUrl: '',
+  },
   data: {} as authData,
   message: '',
   registerUser: (data: registerData) => {
@@ -46,6 +60,13 @@ export const useAuthData = create<authState>((set) => ({
     set((state) => ({
       ...state,
       data: data,
+      user: {
+        id: data.id,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+        profileUrl: data.profileUrl,
+      },
       loading: true,
     }));
   },

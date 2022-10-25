@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { upload } from '../configs/multer-config';
-import { API_ENDPOINTS } from '../constants/api-endpoints';
+import { API_ENDPOINTS } from '@practitionermanagement/store';
 // Controllers
 import {
   loginUser,

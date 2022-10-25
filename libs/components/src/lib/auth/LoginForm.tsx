@@ -2,6 +2,7 @@ import { Formik, Form } from 'formik';
 import { Oval } from 'react-loader-spinner';
 import { Button, Alert } from '..';
 import Input from '../Input/Input';
+import {privateAgent} from '@practitionermanagement/store'
 
 const LoginForm = () => {
   return (
@@ -19,11 +20,9 @@ const LoginForm = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={async(values, { setSubmitting }) => {
+         const { email, password } = values;
+         const res = await privateAgent.post()
         }}
       >
         {({ values, errors, touched, handleChange, isSubmitting }) => (
