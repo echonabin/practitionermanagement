@@ -36,9 +36,13 @@ const Button = (props: ButtonProps) => {
       className={styles[varient]}
       type={type}
     >
-      {IconLeft && <IconLeft className="mr-3" />}
+      {IconLeft && (
+        <IconLeft className="mr-4" color="#fff" height={24} width={24} />
+      )}
       {title}
-      {IconRight && <IconRight className="ml-3" />}
+      {IconRight && (
+        <IconRight className="ml-3" color="#fff" height={24} width={24} />
+      )}
     </button>
   );
 };

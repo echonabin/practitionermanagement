@@ -9,6 +9,7 @@ interface InputProps {
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   className?: string;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
 const Input = (props: InputProps) => {
@@ -20,6 +21,8 @@ const Input = (props: InputProps) => {
     onChange,
     name,
     className,
+    onBlur,
+    ...rest
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   if (type === 'password') {
@@ -54,6 +57,8 @@ const Input = (props: InputProps) => {
           onChange={onChange}
           className="border-[1px] border-gray-300 rounded-lg px-4 py-2 mt-2"
           placeholder={placeholder}
+          onBlur={onBlur}
+          {...rest}
         />
       </div>
     );
@@ -70,6 +75,7 @@ const Input = (props: InputProps) => {
           onChange={onChange}
           className="border-[1px] border-gray-300 rounded-lg px-4 py-2 mt-2"
           placeholder={placeholder}
+          {...rest}
         />
       </div>
     );
@@ -86,6 +92,7 @@ const Input = (props: InputProps) => {
         onChange={onChange}
         className="border-[1px] border-gray-300 rounded-lg px-4 py-2 mt-2"
         placeholder={placeholder}
+        {...rest}
       />
     </div>
   );

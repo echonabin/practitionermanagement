@@ -1,4 +1,5 @@
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
+import { Oval } from 'react-loader-spinner';
 import { Button, Alert } from '..';
 import Input from '../Input/Input';
 
@@ -25,7 +26,7 @@ const LoginForm = () => {
           }, 400);
         }}
       >
-        {({ values, errors, touched, handleChange }) => (
+        {({ values, errors, touched, handleChange, isSubmitting }) => (
           <Form className="space-y-6">
             {errors.email && touched.email && (
               <Alert type="error" content={errors.email} />
@@ -52,8 +53,11 @@ const LoginForm = () => {
               className=""
             />
             <Button
-              title="Log In"
+              title={isSubmitting ? 'Logging in' : 'Login'}
               varient="primary"
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              IconRight={isSubmitting ? Oval : null}
               className="w-full rounded-full py-3"
               type="submit"
             />
