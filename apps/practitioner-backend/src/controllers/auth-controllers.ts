@@ -39,6 +39,7 @@ export const registerUser = async (
     // @ts-ignore
     profileUrl: req.file.location as string,
   });
+
   // hash password
   account.password = hash(password);
   req.file && (await account.save());

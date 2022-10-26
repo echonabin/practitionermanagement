@@ -23,10 +23,11 @@ const Sidebar = () => {
       <div className="mt-8">
         <p className="text-gray-500 font-poppins uppercase">Medicine</p>
         <div className="pt-5 space-y-4">
-          {routes.map((route) => {
+          {routes.map((route, id) => {
             const Icon = route.icon as IconType;
             return (
               <div
+                key={id}
                 className={`flex items-center space-x-2 cursor-pointer ${
                   isActive(route.path)
                     ? 'text-blue-500 hover:text-blue-400'

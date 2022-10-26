@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { baseUrl } from './baseUrls.json';
-import { getCookie, setCookie } from 'cookies-next';
+import router from 'next/router';
+import { baseUrl } from './baseUrls';
+import { getCookie, removeCookies, setCookie } from 'cookies-next';
+import { toast } from 'react-toastify';
 
 type RefreshTokenResponse = {
   jwtToken: string;
@@ -34,19 +36,31 @@ privateAgent.interceptors.response.use(
   function (error) {
     const originalRequest = error.config;
     const refreshToken = getCookie('refreshToken');
+    console.log(error);
     if (
       refreshToken &&
       error?.response?.status === 401 &&
-      error?.response?.data?.message === 'jwt expired'
+      error?.response?.data?.errors[0].message === 'jwt expired'
     ) {
       return axios
-        .get(`${baseUrl}auth/refresh?token=${refreshToken}`)
+        .get(`${baseUrl}/auth/refresh?token=${refreshToken}`)
         .then((res: any) => {
           if (res.status === 200) {
             const tokenData: RefreshTokenResponse = res.data;
             setCookie('accessToken', tokenData.jwtToken);
             return privateAgent(originalRequest);
           }
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            removeCookies('accessToken');
+            removeCookies('refreshToken');
+            toast('Session expired, please login again', {
+              type: 'error',
+            });
+            router.push('/login');
+          }
+          return Promise.reject(err);
         });
     }
     return Promise.reject(error);
