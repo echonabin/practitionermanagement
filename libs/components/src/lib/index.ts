@@ -4,3 +4,6 @@ export { default as LoginForm } from './auth/LoginForm';
 export { default as SignupForm } from './auth/SignupForm';
 export { default as Alert } from './Alert';
 export { default as Layout } from './Layout';
+export { default as Card } from './Card';
+export { default as Chart } from './Chart/Chart';
+export { default as Table } from './Tables';
