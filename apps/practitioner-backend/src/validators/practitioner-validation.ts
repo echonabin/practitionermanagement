@@ -11,6 +11,7 @@ export const PractitionerValidator = {
       startTime: Joi.string().required(),
       endTime: Joi.string().required(),
       address: Joi.string().required(),
+      profileImage: Joi.any().optional(),
     });
     return schema.validate(data);
   },

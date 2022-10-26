@@ -9,3 +9,4 @@ export { default as Chart } from './Chart/Chart';
 export { default as Table } from './Tables';
 export { default as DeleteModal } from './Modal';
 export { default as Loading } from './Loader';
+export { default as PractitionerForm } from './Form/AddPractitionerForm';

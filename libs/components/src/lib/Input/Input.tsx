@@ -4,7 +4,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 interface InputProps {
   label: string;
   placeholder?: string;
-  type: 'text' | 'password' | 'email';
+  type: 'text' | 'password' | 'email' | 'date' | 'number';
   value: string;
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;

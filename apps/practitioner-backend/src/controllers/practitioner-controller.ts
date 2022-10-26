@@ -43,7 +43,7 @@ export const createPractitioner = async (
     // @ts-ignore
     createdBy: req.auth.account._id,
     // @ts-ignore
-    profileImage: req.file.location as string,
+    profileImage: req.files[0].location as string,
   });
   await account.save();
 
@@ -75,7 +75,7 @@ export const updatePractitioner = async (
     : (account = await Practitioner.updateOne(
         { _id: id },
         // @ts-ignore
-        { ...req.body, profileImage: req.file.location as string }
+        { ...req.body, profileImage: req.files[0].location as string }
       ));
 
   account &&

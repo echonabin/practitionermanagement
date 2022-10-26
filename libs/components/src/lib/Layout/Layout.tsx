@@ -9,7 +9,7 @@ const Layout = (props: LayoutProps) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full px-9 py-2 space-y-8">
+      <div className="w-full px-9 py-2 space-y-8 pl-[24%]">
         <Topbar />
         {props.children}
       </div>

@@ -37,7 +37,7 @@ export const registerUser = async (
     email,
     password,
     // @ts-ignore
-    profileUrl: req.file.location as string,
+    profileUrl: req.files[0].location as string,
   });
 
   // hash password

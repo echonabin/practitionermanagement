@@ -55,7 +55,7 @@ const PractitionerRows = (props: PractitionerProps) => {
 
   const renderAction = (cell: Cell) => {
     return (
-      <>
+      <div className="">
         <td>
           <FiEdit className="text-blue-500 text-xl cursor-pointer hover:scale-105 transition-all ease-linear duration-200" />
         </td>
@@ -70,7 +70,7 @@ const PractitionerRows = (props: PractitionerProps) => {
             }}
           />
         </td>
-      </>
+      </div>
     );
   };
 

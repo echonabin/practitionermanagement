@@ -27,7 +27,7 @@ router.get(practitioner.getOne, authorize(), getPractitioner);
 router.post(
   practitioner.create,
   authorize(),
-  upload.single('profileImage'),
+  upload.array('image'),
   createPractitioner
 );
 
@@ -36,7 +36,7 @@ router.post(
 router.put(
   practitioner.update,
   authorize(),
-  upload.single('profileImage'),
+  upload.array('image'),
   updatePractitioner
 );
 

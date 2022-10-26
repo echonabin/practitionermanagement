@@ -17,7 +17,7 @@ router.post(auth.login, loginUser);
 
 // @Method: POST
 // @Path: /api/auth/register
-router.post(auth.register, upload.single('profile'), registerUser);
+router.post(auth.register, upload.array('image'), registerUser);
 
 // @Method: GET
 // @Path: /api/auth/refresh?token=<token>

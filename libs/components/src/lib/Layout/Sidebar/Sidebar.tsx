@@ -16,7 +16,7 @@ const Sidebar = () => {
     return false;
   };
   return (
-    <div className="w-1/5 bg-white shadow-xl border-r-[1px] max-h-screen min-h-screen px-6 py-6 flex flex-col">
+    <div className="w-1/5 bg-white shadow-xl border-r-[1px] max-h-screen min-h-screen px-6 py-6 flex flex-col fixed">
       <div className="max-w-[10rem]">
         <Image alt="logo" className="" src={logo} />
       </div>
