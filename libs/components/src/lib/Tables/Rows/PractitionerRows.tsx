@@ -57,7 +57,14 @@ const PractitionerRows = (props: PractitionerProps) => {
     return (
       <div className="">
         <td>
-          <FiEdit className="text-blue-500 text-xl cursor-pointer hover:scale-105 transition-all ease-linear duration-200" />
+          <FiEdit
+            className="text-blue-500 text-xl cursor-pointer hover:scale-105 transition-all ease-linear duration-200"
+            onClick={() =>
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              router.push(`/practitioner/edit/${cell.row.original._id}`)
+            }
+          />
         </td>
         <td>
           <FiTrash

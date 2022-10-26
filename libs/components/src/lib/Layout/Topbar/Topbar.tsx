@@ -2,7 +2,7 @@ import { FiBell, FiSearch } from 'react-icons/fi';
 
 const Topbar = () => {
   return (
-    <div className="w-full pt-4 flex items-center justify-between">
+    <div className="w-full pt-4 flex items-center justify-between bg-white sticky top-0">
       <div className="relative flex items-center">
         <FiSearch className="text-gray-500 absolute left-3" />
         <input

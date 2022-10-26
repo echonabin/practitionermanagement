@@ -10,3 +10,4 @@ export { default as Table } from './Tables';
 export { default as DeleteModal } from './Modal';
 export { default as Loading } from './Loader';
 export { default as PractitionerForm } from './Form/AddPractitionerForm';
+export { default as UpdatePractitionerForm } from './Form/EditPractitionerForm';

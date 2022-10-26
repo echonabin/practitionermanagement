@@ -23,6 +23,7 @@ export const createPractitioner = async (
     startTime,
     endTime,
     address,
+    isIcu,
   } = req.body;
   const practitioner = await Practitioner.findOne({ email, deletedBy: null });
   if (practitioner) {
@@ -40,6 +41,7 @@ export const createPractitioner = async (
     startTime,
     endTime,
     address,
+    isIcu,
     // @ts-ignore
     createdBy: req.auth.account._id,
     // @ts-ignore
