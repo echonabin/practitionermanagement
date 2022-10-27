@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as React from 'react';
-import { FiEdit, FiTrash } from 'react-icons/fi';
+import { FiEdit, FiTrash, FiToggleLeft, FiToggleRight } from 'react-icons/fi';
 import { Cell } from 'react-table';
 import router from 'next/router';
 import DeleteModal from '../../Modal';
@@ -22,7 +23,17 @@ const PractitionerRows = (props: PractitionerProps) => {
       if (resp.status === 200) {
         setRefresh(true);
         setOpen(false);
+        setCurrentSelected('');
       }
+    }
+  };
+
+  const handleToggle = async (current: boolean | string, id: string) => {
+    const resp = await privateAgent.put(`/practitioner/${id}`, {
+      isIcu: !current,
+    });
+    if (resp.status === 200) {
+      setRefresh(true);
     }
   };
 
@@ -51,6 +62,34 @@ const PractitionerRows = (props: PractitionerProps) => {
         </div>
       );
     }
+  };
+
+  const renderToggle = (cell: Cell) => {
+    // @ts-ignore
+    const value = cell.row.original.isIcu;
+    return (
+      <td className="flex items-center space-x-2 -ml-10">
+        {value ? (
+          <FiToggleLeft
+            className="text-green-500 text-2xl hover:scale-110 transition-all ease-linear duration-200"
+            onClick={() => {
+              setRefresh(true);
+              // @ts-ignore
+              handleToggle(value, cell.row.original._id);
+            }}
+          />
+        ) : (
+          <FiToggleRight
+            className="text-red-500 text-2xl hover:scale-110 transition-all ease-linear duration-200"
+            onClick={() => {
+              setRefresh(true);
+              // @ts-ignore
+              handleToggle(value, cell.row.original._id);
+            }}
+          />
+        )}
+      </td>
+    );
   };
 
   const renderAction = (cell: Cell) => {
@@ -104,7 +143,9 @@ const PractitionerRows = (props: PractitionerProps) => {
                   {c.render('Cell')}
                 </div>
               ) : (
-                renderAction(c)
+                <div className="flex space-x-4">
+                  {[renderToggle(c), renderAction(c)]}
+                </div>
               )}
             </td>
           </>

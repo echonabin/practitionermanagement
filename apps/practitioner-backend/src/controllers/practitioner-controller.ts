@@ -124,7 +124,11 @@ export const getPractitioner = async (req: Request, res: Response) => {
 
 // Get Practitioners
 export const getPractitioners = async (req: Request, res: Response) => {
-  const practitioners = await Practitioner.find({ deletedBy: null });
+  const practitioners = await Practitioner.find(
+    { deletedBy: null },
+    {},
+    { sort: { isIcu: -1 } }
+  );
   res.status(200).json({
     message: 'Practitioners fetched successfully',
     practitioners,

@@ -8,6 +8,7 @@ import {
 import { useRouter } from 'next/router';
 import { Loading } from '@practitionermanagement/components';
 import moment from 'moment';
+import { FiToggleLeft, FiToggleRight } from 'react-icons/fi';
 
 const SinglePractitioner = () => {
   const {
@@ -46,6 +47,7 @@ const SinglePractitioner = () => {
     workingDays,
     startTime,
     endTime,
+    isIcu,
   } = singlePractitioner;
   return (
     <>
@@ -100,6 +102,22 @@ const SinglePractitioner = () => {
                         {address}
                       </span>
                     </p>
+                    <p className="font-poppins font-medium text-gray-400">
+                      Is ICU:{' '}
+                      <span className="text-gray-700 font-normal pl-3">
+                        {isIcu ? 'Yes' : 'No'}
+                      </span>
+                    </p>
+                    <div className="font-poppins font-medium text-gray-400 flex items-center">
+                      ICU:{' '}
+                      <span className="text-gray-700 font-normal pl-3 text-3xl">
+                        {isIcu ? (
+                          <FiToggleRight className="text-green-400" />
+                        ) : (
+                          <FiToggleLeft className="text-red-400" />
+                        )}
+                      </span>
+                    </div>
                   </div>
                   <p className="text-gray-500 pb-2">More Info</p>
                   <div className="flex space-x-4 pb-2 border-b-[1px]">

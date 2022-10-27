@@ -12,6 +12,7 @@ export const PractitionerValidator = {
       endTime: Joi.string().required(),
       address: Joi.string().required(),
       isIcu: Joi.boolean().optional(),
+      profileImage: Joi.string().optional(),
     });
     return schema.validate(data);
   },

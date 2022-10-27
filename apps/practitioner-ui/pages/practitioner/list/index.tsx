@@ -41,6 +41,10 @@ const ListPractitioner = () => {
         accessor: 'address',
       },
       {
+        Header: 'IsIcu',
+        accessor: 'isIcu',
+      },
+      {
         Header: 'Action',
         accessor: '',
       },

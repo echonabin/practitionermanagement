@@ -33,7 +33,6 @@ const PractitionerForm = () => {
           startTime: '',
           endTime: '',
           address: '',
-          profileImage: '',
         }}
         validate={(values) => {
           const errors = {} as any;

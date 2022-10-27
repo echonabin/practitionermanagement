@@ -14,6 +14,7 @@ type Practitioner = {
   profileImage: string;
   createdAt: string;
   updatedAt: string;
+  isIcu: boolean;
 };
 
 type practitionerData = {
