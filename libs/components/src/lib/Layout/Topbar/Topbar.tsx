@@ -18,10 +18,14 @@ const Topbar = () => {
       <div className="flex items-center space-x-3">
         <FiBell className="text-gray-300 text-3xl transform rotate-[20deg] hover:rotate-0 transition-all ease-linear duration-200 hover:text-blue-500 cursor-pointer" />
         <img
-          src={profileUrl.replace(
-            'practitionerbucket1.practitionerbucket1',
-            'practitionerbucket1'
-          )}
+          src={
+            profileUrl
+              ? profileUrl.replace(
+                  'practitionerbucket1.practitionerbucket1',
+                  'practitionerbucket1'
+                )
+              : ''
+          }
           alt="profile"
           className="w-10 h-10 rounded-full"
         />
