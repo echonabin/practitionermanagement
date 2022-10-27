@@ -37,11 +37,12 @@ export const registerUser = async (
     email,
     password,
     // @ts-ignore
-    profileUrl: req.file.location as string,
+    profileUrl: req.files[0].location as string,
   });
+
   // hash password
   account.password = hash(password);
-  req.file && (await account.save());
+  await account.save();
 
   res.status(200).json({
     message: 'User created successfully',

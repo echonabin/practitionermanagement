@@ -23,6 +23,7 @@ export const createPractitioner = async (
     startTime,
     endTime,
     address,
+    isIcu,
   } = req.body;
   const practitioner = await Practitioner.findOne({ email, deletedBy: null });
   if (practitioner) {
@@ -40,10 +41,11 @@ export const createPractitioner = async (
     startTime,
     endTime,
     address,
+    isIcu,
     // @ts-ignore
     createdBy: req.auth.account._id,
     // @ts-ignore
-    profileImage: req.file.location as string,
+    profileImage: req.files[0].location as string,
   });
   await account.save();
 
@@ -75,7 +77,7 @@ export const updatePractitioner = async (
     : (account = await Practitioner.updateOne(
         { _id: id },
         // @ts-ignore
-        { ...req.body, profileImage: req.file.location as string }
+        { ...req.body, profileImage: req.files[0].location as string }
       ));
 
   account &&
@@ -122,7 +124,11 @@ export const getPractitioner = async (req: Request, res: Response) => {
 
 // Get Practitioners
 export const getPractitioners = async (req: Request, res: Response) => {
-  const practitioners = await Practitioner.find({ deletedBy: null });
+  const practitioners = await Practitioner.find(
+    { deletedBy: null },
+    {},
+    { sort: { isIcu: -1 } }
+  );
   res.status(200).json({
     message: 'Practitioners fetched successfully',
     practitioners,

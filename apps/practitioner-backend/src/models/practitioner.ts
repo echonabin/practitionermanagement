@@ -13,6 +13,7 @@ interface PractitionerAttrs {
   createdBy: string;
   deletedBy?: string;
   profileImage?: string;
+  isIcu?: boolean;
 }
 
 //  Interface that describes what a single Practitioner has
@@ -28,6 +29,7 @@ interface PractitionerDoc extends mongoose.Document {
   createdBy: string;
   deletedBy?: string;
   profileImage?: string;
+  isIcu?: boolean;
 }
 
 // Interface that describes the properties that a Practitioner Model has (build method)
@@ -68,6 +70,10 @@ const PractitionerSchema = new mongoose.Schema(
     address: {
       type: String,
       required: true,
+    },
+    isIcu: {
+      type: Boolean,
+      default: false,
     },
     createdBy: {
       type: mongoose.Types.ObjectId,

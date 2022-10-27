@@ -1,7 +1,8 @@
+import { withAuth } from '@practitionermanagement/utils';
 import React from 'react';
 
 const index = () => {
-  return <div>index</div>;
+  return <div>Landing Page</div>;
 };
 
-export default index;
+export default withAuth(index);
