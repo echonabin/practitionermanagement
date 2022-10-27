@@ -45,6 +45,7 @@ const LoginForm = () => {
             setSubmitting(false);
             setCookie('accessToken', res.data.jwtToken);
             setCookie('refreshToken', res.data.refreshToken.token);
+            setCookie('userProfile', res.data.profileUrl);
             router.push('/dashoboard');
             loginUser(res.data);
           } catch (error: any) {

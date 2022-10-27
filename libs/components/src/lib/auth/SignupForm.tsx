@@ -49,12 +49,12 @@ const SignupForm = () => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
-          const id = toast.loading('Loading...');
+          const id = toast.loading('Adding user...');
           const formData = new FormData();
           for (const key in values) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            formData.append(key, values[key]);
+            if (key !== 'confirmPassword') formData.append(key, values[key]);
             formData.append('image', image!);
           }
           try {
@@ -65,6 +65,7 @@ const SignupForm = () => {
               type: 'success',
               isLoading: false,
             });
+            console.log(res.data);
             resetForm();
             setSubmitting(false);
             router.push('/login');

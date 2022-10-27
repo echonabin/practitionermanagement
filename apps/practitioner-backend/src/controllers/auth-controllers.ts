@@ -42,7 +42,7 @@ export const registerUser = async (
 
   // hash password
   account.password = hash(password);
-  req.file && (await account.save());
+  await account.save();
 
   res.status(200).json({
     message: 'User created successfully',

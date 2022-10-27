@@ -1,9 +1,8 @@
-import { useAuthData } from '@practitionermanagement/store';
 import { FiBell, FiSearch } from 'react-icons/fi';
+import { getCookie } from 'cookies-next';
 
 const Topbar = () => {
-  const { user } = useAuthData();
-  const { profileUrl } = user;
+  const profileUrl = getCookie('userProfile') as string;
   return (
     <div className="w-full pt-4 flex items-center justify-between bg-white sticky top-0">
       <div className="relative flex items-center">
