@@ -3,6 +3,9 @@ import { Formik, Form } from 'formik';
 import { Button, Alert } from '..';
 import Input from '../Input/Input';
 import { Oval } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
+import { privateAgent } from '@practitionermanagement/store';
+import router from 'next/router';
 
 const SignupForm = () => {
   const [image, setImage] = useState(null);
@@ -45,11 +48,38 @@ const SignupForm = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            console.log(values, image);
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          const id = toast.loading('Loading...');
+          const formData = new FormData();
+          for (const key in values) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            formData.append(key, values[key]);
+            formData.append('image', image!);
+          }
+          try {
+            const res = await privateAgent.post('/auth/register', formData);
+            toast.update(id, {
+              render: 'User Added',
+              autoClose: 4000,
+              type: 'success',
+              isLoading: false,
+            });
+            resetForm();
             setSubmitting(false);
-          }, 400);
+            router.push('/login');
+          } catch (error: any) {
+            console.log(error);
+            toast.update(id, {
+              render:
+                error.response.status === 400
+                  ? error.response.data.errors[0].message
+                  : error.message,
+              autoClose: 4000,
+              type: 'error',
+              isLoading: false,
+            });
+          }
         }}
       >
         {({

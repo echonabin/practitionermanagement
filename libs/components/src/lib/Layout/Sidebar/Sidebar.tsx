@@ -21,7 +21,7 @@ const Sidebar = () => {
         <Image alt="logo" className="" src={logo} />
       </div>
       <div className="mt-8">
-        <p className="text-gray-500 font-poppins uppercase">Medicine</p>
+        <p className="text-gray-500 font-poppins uppercase">Navigation</p>
         <div className="pt-5 space-y-4">
           {routes.map((route, id) => {
             const Icon = route.icon as IconType;
