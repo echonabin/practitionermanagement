@@ -46,7 +46,7 @@ const LoginForm = () => {
             setCookie('accessToken', res.data.jwtToken);
             setCookie('refreshToken', res.data.refreshToken.token);
             setCookie('userProfile', res.data.profileUrl);
-            router.push('/dashoboard');
+            router.push('/dashboard');
             loginUser(res.data);
           } catch (error: any) {
             console.log(error);
